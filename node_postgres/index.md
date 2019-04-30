@@ -23,12 +23,12 @@ and how it does its magic.
 ### constructor
 
 {% highlight JavaScript linenos %}
-    {% include constructor.js %}
+    {% include node_postgres/constructor.js %}
 {% endhighlight %}
 
 ### connect
 
 {% highlight JavaScript linenos %}
-    {% include connect.js %}
+    {% include node_postgres/connect.js %}
 {% endhighlight %}
 
