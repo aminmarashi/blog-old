@@ -22,8 +22,13 @@ and how it does its magic.
 
 ### constructor
 
-{% gist a9848d5bc57b4b5fb510f08bcc5c4efe node-postgres-constructor.js %}
+{% highlight JavaScript %}
+    {% include constructor.js %}
+{% endhighlight %}
 
 ### connect
 
-{% gist a9848d5bc57b4b5fb510f08bcc5c4efe node-postgres-connect.js %}
+{% highlight JavaScript %}
+    {% include connect.js %}
+{% endhighlight %}
+
