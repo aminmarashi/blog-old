@@ -22,13 +22,13 @@ and how it does its magic.
 
 ### constructor
 
-{% highlight JavaScript %}
+{% highlight JavaScript linenos %}
     {% include constructor.js %}
 {% endhighlight %}
 
 ### connect
 
-{% highlight JavaScript %}
+{% highlight JavaScript linenos %}
     {% include connect.js %}
 {% endhighlight %}
 
