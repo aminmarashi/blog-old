@@ -22,4 +22,8 @@ and how it does its magic.
 
 ### constructor
 
-{% gist a9848d5bc57b4b5fb510f08bcc5c4efe %}
+{% gist a9848d5bc57b4b5fb510f08bcc5c4efe node-postgres-constructor.js %}
+
+### constructor
+
+{% gist a9848d5bc57b4b5fb510f08bcc5c4efe node-postgres-connect.js %}
