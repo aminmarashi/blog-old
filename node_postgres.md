@@ -20,4 +20,6 @@ and how it does its magic.
 
 ## Connection
 
+### constructor
 
+{% gist a9848d5bc57b4b5fb510f08bcc5c4efe %}
