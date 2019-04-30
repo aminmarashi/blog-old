@@ -1,6 +1,1 @@
 theme: jekyll-theme-hacker
-kramdown:
-  syntax_highlighter_opts:
-    block:
-      line_numbers: true
-
