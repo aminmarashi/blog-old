@@ -3,3 +3,7 @@
     padding: 80px 56px;
     margin-bottom: 80px;
 }
+
+.page-layout.is-small-screen .page-content {
+    padding: 40px 28px;
+}
