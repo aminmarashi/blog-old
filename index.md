@@ -1,3 +1,6 @@
+---
+layout: index
+---
 # page 1
 
 ## paragraph 1
