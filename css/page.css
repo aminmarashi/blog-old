@@ -7,3 +7,7 @@
 .page-layout.is-small-screen .page-content {
     padding: 40px 28px;
 }
+
+.page-content blockquote p {
+	display: inline;
+}
