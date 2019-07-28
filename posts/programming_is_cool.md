@@ -10,7 +10,7 @@ To start, first I'd like to dig a bit deeper to the word programming.
 > Computer programming is the process of designing and building an executable computer program
 > for accomplishing a specific computing task.
 
-> -- <cite>Wikipedia</cite>
+-- <cite>Wikipedia</cite>
 
 So programming is kind of like configuring a computer to do what you want it to do. It's not much
 different than when you program your washing machine for example to match the type of clothes
