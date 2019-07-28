@@ -8,7 +8,7 @@ To start, first I'd like to dig a bit deeper to the word programming.
 #### What is programming?
 
 > Computer programming is the process of designing and building an executable computer program
-> for accomplishing a specific computing task.
+for accomplishing a specific computing task.
 
 -- <cite>Wikipedia</cite>
 
