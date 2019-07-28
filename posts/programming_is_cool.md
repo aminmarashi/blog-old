@@ -29,9 +29,9 @@ to make it do specific tasks.
 
 Can anyone learn how to program? Absolutely. Why won't they? Maybe it's just a matter of time.
 Already many teenagers learn how to program in their high school or even before, and programming
-languages evolve to meet the needs of its users.
+languages evolve to be more accessible and more capable.
 
-It's not even very hard to imagine to one day seeing a machine programming another machine.
+It's not even very hard to imagine, one day a machine programs another machine.
 
 #### Then programming is not a superpower?
 
@@ -68,17 +68,17 @@ they were fascinated about was built, maybe they wanted to build one of their ow
 it to match their fantasies.
 
 Many of great programmers I know became programmers because of their field of interest
-introduced them to programming, some examples are: robotics, game development, simulation
-software in physics and biology, and mathematical software.
+introduced them to programming. Fields like: robotics, game development, simulation
+software in physics and biology, and mathematical software are such examples.
 
 People fascinated about those things tend to be interested in learning programming, because
 it gives them more power and control over what they want to do with their ideas.
 
-A vast number of people also learn to program because it was probably a good/only way for
-them to start making money, by learning a skill in a relatively short amount of time.
+A vast number of people also learn to program because it was probably a good or the only way
+for them to start making money, by learning a skill in a relatively short amount of time.
 
 Either way, once you learn how to talk to a computer, you can harness its powers and use it
-to solving real-world problems and making something cool.
+for solving real-world problems and making something cool.
 
 There are very few people that actually like programming for the sake of programming itself,
 after all, we like to make a connection with real life and our fantasies.
@@ -98,7 +98,7 @@ correctly or completely, than not knowing how to translate them to a computer la
 
 Learning how to program is only the start, by learning a programming language, you know
 how to talk to a computer. But in order to have useful software, you need to learn how to
-deal with the other side, the complexities of the real world and human interactions.
+deal with the other side too, the complexities of the real world and human interactions.
 
 Learning how to deal with both sides, is a long process and requires many years of
 studying, experimenting and learning.
@@ -121,6 +121,6 @@ care and attention. Therefore the word *software development* is there to remind
 if you want a long-lasting software that can be used in real-life situations, learning
 how to program is only the start.
 
-So hopefully you'll take the red pill and learn to build something that you always wanted
+So hopefully you'll "take the red pill" and learn to build something that you always wanted
 to have.
 
