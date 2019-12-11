@@ -15,4 +15,4 @@ It's just the beginning of the life of this blog, and there are only so many pos
 ---
 
 This blog is on
-[GitHub](https://github.com/litkdr/litkdr.github.io), comments and PRs are welcome.
+[GitHub](https://github.com/lit-codes/blog), comments and PRs are welcome.
