@@ -1,16 +1,13 @@
 ---
 layout: index
-title: Litkoder's blog
+title: Lit Codes
 ---
 
-### Welcome
+### Welcome to Lit Codes
 
-I write here about software development and things that interest me in general. It's nice to
-see you here.
+Here is a list of all blog posts:
 
-It's just the beginning of the life of this blog, and there are only so many posts:
-
-- [Programming is cool](posts/programming_is_cool.md)
+- [Compiling for ARM](posts/compiling-for-arm.md)
 
 ---
 
