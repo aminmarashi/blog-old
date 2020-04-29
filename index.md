@@ -8,6 +8,7 @@ title: Lit Codes
 Here is a list of all blog posts:
 
 - [Compiling for ARM](posts/compiling-for-arm.md)
+- [Compiling Chef](posts/compiling-chef.md)
 
 ---
 
