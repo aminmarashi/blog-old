@@ -20,9 +20,9 @@ page</a> is very helpful when it comes to compiling Ruby from source code.
 
 The building process is as easy as:
 
-```bash:title=terminal
-$ ./configure
-$ make
+```bash
+./configure
+make
 ```
 
 ### Installation in a destination directory
@@ -30,8 +30,8 @@ $ make
 Now a `make install` will install Ruby in `/usr` directory, but that behavior
 can be changed using `DESTDIR` option:
 
-```
-$ make install DESTDIR=~/ruby
+```bash
+make install DESTDIR=~/ruby
 ```
 
 The above command will install the build in `~/ruby`. This is useful if `root`
@@ -42,7 +42,7 @@ machine.
 
 After building Ruby, you can install it globally by:
 
-```
+```bash
 sudo cp -r ~/ruby/usr/* /usr
 ```
 
@@ -55,8 +55,8 @@ comes as a package with the `Ruby`.
 
 Make sure `bundler` is installed, if not install it:
 
-```
-$ gem install bundler
+```bash
+gem install bundler
 ```
 
 ### Downloading the source
@@ -65,18 +65,18 @@ Download the specific version of Chef source from <a
 href="https://github.com/chef/chef/" target="_blank">Chef on GitHub</a> then
 extract the package.
 
-```
-$ wget https://github.com/chef/chef/archive/v15.6.10.tar.gz
-$ tar xf v15.6.10.tar.gz
-$ cd ~/chef-15.6.10/omnibus # yes, chef is built from the omnibus folder
+```bash
+wget https://github.com/chef/chef/archive/v15.6.10.tar.gz
+tar xf v15.6.10.tar.gz
+cd ~/chef-15.6.10/omnibus # yes, chef is built from the omnibus folder
 ```
 
 ### Installing dependencies
 
 Then install the `gem`s required for building chef locally:
 
-```
-$ bundle install --without development --path=.bundle
+```bash
+bundle install --without development --path=.bundle
 ```
 
 This will install all the dependencies in `.bundle` inside the source folder.
@@ -85,8 +85,8 @@ This will install all the dependencies in `.bundle` inside the source folder.
 
 After that start building Chef using `omnibus`:
 
-```
-$ bundle exec omnibus build chef -l internal
+```bash
+bundle exec omnibus build chef -l internal
 ```
 
 <a href="https://github.com/chef/omnibus" target="_blank">Omnibus</a> is a
@@ -98,8 +98,8 @@ The result of the above build is a package specific to your OS, in this case,
 I'm building Chef for Debian, so there will be a `.deb` file that I will able
 to install and uninstall using `dpkg`.
 
-```
-$ ls pkg/
+```bash{outputLines: 2}
+ls pkg/
 chef_15.6.10*.deb
 ```
 
@@ -107,13 +107,12 @@ chef_15.6.10*.deb
 
 In my case the build failed because of a licensing error, you can try
 ignoring licensing problems for the build, read more about that in <a
-href="https://github.com/chef/omnibus/issues/696" target="_blank">issue
-#696</a>.
+href="https://github.com/chef/omnibus/issues/696" target="_blank">issue #696</a>.
 
 In my case, I fixed that by editing the `omnibus.rb` file (the omnibus config)
 and adding these two lines:
 
-```
+```ruby:title=omnibus.rb
 fatal_licensing_warnings false
 fatal_transitive_dependency_licensing_warnings false
 ```
@@ -122,13 +121,13 @@ fatal_transitive_dependency_licensing_warnings false
 
 Now we can easily install the package:
 
-```
-$ sudo dpkg -i pkg/chef_15.6.10*.deb
+```bash
+sudo dpkg -i pkg/chef_15.6.10*.deb
 ```
 
 And verify the desired version is installed:
 
-```
-$ chef-client -v
+```bash{outputLines: 2}
+chef-client -v
 Chef Infra Client: 15.6.10
 ```
