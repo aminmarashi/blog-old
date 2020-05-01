@@ -60,6 +60,7 @@
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
     "dev": "gatsby develop",
+    "deploy": "git subtree push --prefix public origin gh-pages",
     "dev-mobile": "gatsby develop -H 0.0.0.0"
   },
   "repository": {
