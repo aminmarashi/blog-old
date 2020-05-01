@@ -4,22 +4,21 @@ date: 2020-04-29
 tags: [How-to]
 ---
 
-# How to compile Chef from source
-
-In this blog post we will see how Chef can be built from source. This is useful
-when you want to install Chef on a distro or machine which is not supported by
-default. Which is true for most ARM processors at the time of writing this.
+In this blog post, we will see how Chef can be built from source code. This is
+useful when you want to install Chef on a distro or machine which is not
+supported by default. Which is true for most ARM processors at the time of
+writing this.
 
 ## Compiling Ruby
 
-**Note:** You can skip this step and go directly to [Compiling Chef](#compiling-chef), if
-your distro already has a suitable ruby version. In my case the version was too
+**Note:** You can skip this step and go directly to [Compiling Chef](#compiling-chef) if
+your distro already has a suitable ruby version. In my case, the version was too
 old for the Chef build to work.
 
-The [Ruby github page](https://github.com/ruby/ruby#git) is very helpful when it
-comes to compiling Ruby from source.
+The <a href="https://github.com/ruby/ruby#git" target="_blank">Ruby GitHub
+page</a> is very helpful when it comes to compiling Ruby from source code.
 
-The builing process is as easy as:
+The building process is as easy as:
 
 ```bash:title=terminal
 $ ./configure
@@ -62,8 +61,9 @@ $ gem install bundler
 
 ### Downloading the source
 
-Download the specific version of Chef source from [Chef on Github](https://github.com/chef/chef/)
-then extract the package.
+Download the specific version of Chef source from <a
+href="https://github.com/chef/chef/" target="_blank">Chef on GitHub</a> then
+extract the package.
 
 ```
 $ wget https://github.com/chef/chef/archive/v15.6.10.tar.gz
@@ -89,14 +89,14 @@ After that start building Chef using `omnibus`:
 $ bundle exec omnibus build chef -l internal
 ```
 
-[Omnibus](https://github.com/chef/omnibus) is a packaging solution which makes
-sure the packages and all its dependencies are installed in a way that are
-easily managable and will not conflict with the existing packages installed on
-your system.
+<a href="https://github.com/chef/omnibus" target="_blank">Omnibus</a> is a
+packaging solution that makes sure the packages and all its dependencies are
+installed in a way that is easily manageable and will not conflict with the
+existing packages installed on your system.
 
-Result of the above build is a package specific to your OS, in this case I'm
-building Chef for Debian, so there will be a `.deb` file which I will able to
-install and uninstall using `dpkg`.
+The result of the above build is a package specific to your OS, in this case,
+I'm building Chef for Debian, so there will be a `.deb` file that I will able
+to install and uninstall using `dpkg`.
 
 ```
 $ ls pkg/
@@ -106,9 +106,11 @@ chef_15.6.10*.deb
 ### Licensing issues
 
 In my case the build failed because of a licensing error, you can try
-ignoring licensing problems for the build, read more about that in [issue #696](https://github.com/chef/omnibus/issues/696).
+ignoring licensing problems for the build, read more about that in <a
+href="https://github.com/chef/omnibus/issues/696" target="_blank">issue
+#696</a>.
 
-In my case I fixed that by editing the `omnibus.rb` file (the omnibus config)
+In my case, I fixed that by editing the `omnibus.rb` file (the omnibus config)
 and adding these two lines:
 
 ```

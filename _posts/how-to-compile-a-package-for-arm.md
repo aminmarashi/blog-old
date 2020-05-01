@@ -4,144 +4,135 @@ date: 2020-04-28
 tags: [How-to]
 ---
 
-# How to compile a package for ARM
+In this post, we will use `Qemu multiarch` inside Docker to compile C source
+codes for ARM processors.
 
-In this blog post we will use Qemu multiarch on Docker to compile C source codes
-for ARM processors.
-
-If you want to know how to run a ARM64 Debian on Docker skip to [Qemu multiarch](#qemu-multiarch)
+If you want to know how to run an ARM64 Debian inside Docker skip to [Qemu
+multiarch](#qemu-multiarch)
 
 ## ARM architecture
 
 ARM refers to a large group of CPU architectures designed for embedded systems
-and low cost computing. There are many variations of ARM instruction code and
-unfortunately they are not very compatible with each other.
+and low-cost computing. There are many variations of ARM instruction code and
+unfortunately, they are not very compatible with each other.
 It's important to identify the target architecture otherwise the built files
 may not be compatible with the target machine.
 
-For this document I am going to compile for `arm64` (aka `aarch64` as GCC calls
-it). This architecture is used on `AWS` ARM instances which are available for
+For this document, I am going to compile for `arm64` (aka `aarch64` as GCC calls
+it). This architecture is used on `AWS ARM instances` which are available for a
 cheaper price than the AMD64 ones.
 
-In a Debian machine running on an `aarch64` you can see:
+Let's check the architecture of a Debian machine running on `aarch64`:
 
-```
-$ uname -a
-Linux hostname 4.9.0-12-arm64 #1 SMP Debian 4.9.210-1 (2020-01-20) aarch64 GNU/Linux
-```
-
-And:
-
-```
-$ dpkg --print-architecture
+```bash{outputLines: 2,4}
+uname -a
+Linux hostname [version] #1 SMP Debian 4.9.210-1 [date] aarch64 GNU/Linux
+dpkg --print-architecture
 arm64
 ```
 
 As you can see `arm64` and `aarch64` are used almost interchangeably.
 
-There are two ways we can go about building, one is `cross compiling` using
-`aarch64-linux-gnu-gcc` which is GCC support for ARM64 architecture.
-
-The other (and less complicated) way is to make the package inside a VM. I will
-use `Docker` with `qemu multiarch` which is basically a VM that allows running
-Docker images built for other architectures including `aarch64`.
-
 ## Building using Docker
 
-The Docker image for `aarch64` is officially deprecated in favor of [`arch64v8`](https://hub.docker.com/r/arm64v8/debian/)
-which has support for a broader variants of the architecture.
+There are two ways we can go about building a source file for a different
+architecture of your current machine (e.g. your machine runs on an `X86_64` CPU
+and you want to compile for `arm64`).
+
+One way is `cross-compiling` inside a machine with a different architecture
+using `aarch64-linux-gnu-gcc` which is a GCC cross-compiler for `arm64`
+architecture.
+
+The other (and less complicated) way is to make the package inside a Virtual
+Machine. I will use `Docker` with `Qemu multiarch` which acts similar to a VM
+and allows running Docker images built for other architectures including
+`aarch64`.
 
 ### Qemu multiarch
 
-First we will need to enable [`qemu-user-static`](https://github.com/multiarch/qemu-user-static)
+First, we will need to enable <a href="https://github.com/multiarch/qemu-user-static" target="_blank">`qemu-user-static`</a>
 which allows us to run the Docker image built for ARM.
 
-**Note:** This setup uses `binfmt`, read more: [`binfmt_misc`](https://en.wikipedia.org/wiki/Binfmt_misc)
+**Note:** This setup uses `binfmt`, read more: <a href="https://en.wikipedia.org/wiki/Binfmt_misc" target="_blank">`binfmt_misc`</a>
 
-```
+```bash
 docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
 ```
 
-This will setup the multi arch files and now we can run Docker images that are
+This will setup the multiarch files and now we can run Docker images that are
 built for different architectures seamlessly.
 
 ### Debian for aarch64
 
-After enabling mutliarch, we can simply run the debian image built for ARM:
+The Docker image for `aarch64` is officially deprecated in favor of <a href="https://hub.docker.com/r/arm64v8/debian/" target="_blank">`arch64v8`</a>
+which has support for broader variants of the architecture.
 
-```
+After enabling mutliarch, we can simply run the Debian image built for ARM:
+
+```bash{outputLines: 2}
 docker run -it arm64v8/debian:stretch
 root@3b853bce5181:/#
 ```
 
 Now we can see the architecture is shown to be ARM:
 
-```
-# uname -a
-Linux 3b853bce5181 5.3.0-46-generic #38-Ubuntu SMP Fri Mar 27 17:37:05 UTC 2020 aarch64 GNU/Linux
-```
-
-```
-# dpkg --print-architecture
+```bash{outputLines: 2,4}
+uname -a
+Linux 3b853bce5181 5.3.0-46-generic #38-Ubuntu SMP [date] aarch64 GNU/Linux
+dpkg --print-architecture
 arm64
 ```
 
 That's it, we should now be able to download the source code and build it for
 `aarch64` inside that container.
 
-### Downloading and building ls
+### Building a simple helloworld in C
 
 Just for the sake of the demonstration, let's write a simple hello world `C` and
 compile it for ARM.
 
-```
-cat <<EOF > helloworld.c
+```c:title=helloworld.c
 #include <stdio.h>
 int main() {
    printf("Hello, World!\n");
    return 0;
 }
-EOF
 ```
 
 First we will need to install `gcc` to compile our source code:
 
-```
-# apt update && apt install gcc file -y
+```bash
+apt update && apt install gcc file -y
 ```
 
-Then we can compile our source code:
+Then we can compile our source code and run it:
 
-```
+```bash{outputLines: 3}
 gcc -o helloworld helloworld.c
-```
-
-And then run it:
-
-```
-# ./helloworld
+./helloworld
 Hello, World!
 ```
 
 We can also use the `file` command to tell us about the binary format of the
 executable we just built:
 
-```
+```bash{outputLines: 2}
+file ./helloworld
 helloworld: ELF 64-bit LSB shared object, ARM aarch64, version 1 (SYSV) ...
 ```
 
-Yes, it's clearly built for ARM.
+It's correctly built for ARM :tada:.
 
 One little trick we can do with GCC is that we can see the assembler code,
-therefore we can see how the instruction set looks like:
+therefore we can see what the instruction set looks like:
 
-```
+```bash
 gcc -o helloworld.asm -S helloworld.c
 ```
 
 Contents of `helloworld.asm` will look like this:
 
-```
+```nasm
 	.arch armv8-a
 	.file	"helloworld.c"
 	.section	.rodata
@@ -172,12 +163,9 @@ This method can be used to build applications that run on other ARM processors.
 For example on Raspberry Pi devices, instead of `aarch64` and `arm64`, you
 would expect something similar to `armv7l` and `armhf`.
 
-```
-$ uname -a
-Linux raspberrypi 4.19.97-v7l+ #1294 SMP Thu Jan 30 13:21:14 GMT 2020 armv7l GNU/Linux
-```
-
-```
-$ dpkg --print-architecture
+```bash{outputLines: 2,4}
+uname -a
+Linux raspberrypi 4.19.97-v7l+ #1294 SMP [date] armv7l GNU/Linux
+dpkg --print-architecture
 armhf
 ```
