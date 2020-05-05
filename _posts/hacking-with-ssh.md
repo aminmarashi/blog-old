@@ -72,3 +72,47 @@ Sat 02 May 2020 11:51:10 PM +08
 A list of cool [ssh one-liners](/hacking-with-ssh-one-liners) you can do
 with this feature. Really, the possiblities are endless.
 
+## Redirecting X
+
+Have you ever wanted to run a GUI application on a remote server? Sure there
+are ways like VNC, etc. but the experience won't be as good as running the app
+on your machine.
+
+If your remote server and your client machine both are running a Linux desktop,
+there is a secure and convenient way of running the app in the remote server
+using the X server already running on your client machine.
+
+This works because GUI applications can use any X server as their client.
+
+```bash
+ssh -XC the-internet chromium-browser
+```
+
+This will open a `chromium-browser` on `the-internet` server, and connects it
+to your X display. You can interact with the window just like you interact with
+any other window in your desktop. You can even copy/paste both ways with that
+window.
+
+The `-X` option opens a connection to X11 on your machine from the remote
+server which the remote GUI app connects to. Use this option with caution on
+servers you absolutely trust, please refer to the `ssh` man page for the
+security implications. 
+
+The `-C` is optional, it enables compression on the connection which makes the
+interaction faster.
+
+## Create a socks proxy
+
+If you want to use your remote server as a proxy server, you can simply use the
+`-D` option, with a port. The ssh client will bind to that port and forward any
+connections to that port to your server.
+
+```bash
+ssh -Nf -D1080 the-internet
+```
+
+The `-D` option will allocate port `1080` on your machine, you can set
+`127.0.0.1:1080` as the socks5 proxy in your browser and connect to the server.
+
+The `-Nf` option combination is optional, it basically runs the ssh client in
+the background.
