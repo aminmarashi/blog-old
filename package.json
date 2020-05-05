@@ -52,6 +52,7 @@
     "lit-codes"
   ],
   "scripts": {
+    "rebuild": "gatsby clean && gatsby build",
     "build": "gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
@@ -60,7 +61,8 @@
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
     "dev": "gatsby develop",
-    "deploy": "git subtree push --prefix public origin gh-pages",
+    "gh-pages": "git subtree push --prefix public origin gh-pages",
+    "deploy": "npm run rebuild && git checkout public/CNAME && git add public && git commit -m 'Pages build' && npm run gh-pages",
     "dev-mobile": "gatsby develop -H 0.0.0.0"
   },
   "repository": {
