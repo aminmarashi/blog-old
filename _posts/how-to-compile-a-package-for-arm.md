@@ -12,8 +12,8 @@ multiarch](#qemu-multiarch)
 
 ## ARM architecture
 
-<a href="https://en.wikipedia.org/wiki/ARM_architecture"
-target="_blank">ARM</a> refers to a large group of CPU architectures designed
+<a href="https://en.wikipedia.org/wiki/ARM_architecture" target="_blank">ARM</a>
+refers to a large group of CPU architectures designed
 for embedded systems and low-cost computing. There are many variations of ARM
 instruction code and unfortunately, they are not very compatible with each
 other.  It's important to identify the target architecture otherwise the
@@ -51,10 +51,12 @@ and allows running Docker images built for other architectures including
 
 ### Qemu multiarch
 
-First, we will need to enable <a href="https://github.com/multiarch/qemu-user-static" target="_blank">`qemu-user-static`</a>
+First, we will need to enable
+<a href="https://github.com/multiarch/qemu-user-static" target="_blank">qemu-user-static</a>
 which allows us to run the Docker image built for ARM.
 
-**Note:** This setup uses `binfmt`, read more: <a href="https://en.wikipedia.org/wiki/Binfmt_misc" target="_blank">`binfmt_misc`</a>
+**Note:** This setup uses `binfmt`, read more:
+<a href="https://en.wikipedia.org/wiki/Binfmt_misc" target="_blank">binfmt_misc</a>
 
 ```bash
 docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
@@ -72,9 +74,10 @@ docker run -it arm64v8/debian:stretch
 root@3b853bce5181:/#
 ```
 
-> The Docker image for <a href="https://hub.docker.com/r/aarch64/debian"
- target="_blank">`aarch64`</a> is officially deprecated in favor of <a
- href="https://hub.docker.com/r/arm64v8/debian/" target="_blank">`arch64v8`</a>
+> The Docker image for
+<a href="https://hub.docker.com/r/aarch64/debian" target="_blank">aarch64</a>
+is officially deprecated in favor of
+<a href="https://hub.docker.com/r/arm64v8/debian/" target="_blank">arch64v8</a>
 which has support for broader variants of the architecture.
 
 Now we can see the architecture is shown to be ARM:

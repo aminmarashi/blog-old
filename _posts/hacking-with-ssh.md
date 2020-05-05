@@ -5,14 +5,13 @@ tags: [ssh]
 ---
 
 Cool things you can do with an ssh client, and a Linux machine. Secure Shell is
-a protocol to connect to a machine over the network securely. The <a
-href="https://www.openssh.com/" target="_blank">`OpenSSH`</a> client is more
-than just a secure shell. It has quite a few features that make it uniquely
-useful when connecting two or more machines.
+a protocol to connect to a machine over the network securely. The
+<a href="https://www.openssh.com/" target="_blank">OpenSSH</a>
+client is more than just a secure shell. It has quite a few features that make
+it uniquely useful when connecting two or more machines.
 
-This post is inspired by <a
-href="https://smallstep.com/blog/ssh-tricks-and-tips/" target="_blank">ssh tips
-and tricks</a>.
+This post is inspired by
+<a href="https://smallstep.com/blog/ssh-tricks-and-tips/" target="_blank">ssh tips and tricks</a>.
 
 ## Logging in without a password
 
@@ -122,3 +121,19 @@ The `-D` option will allocate port `1080` on your machine, you can set
 
 The `-Nf` option combination is optional, it basically runs the ssh client in
 the background.
+
+## Connecting via a hop
+
+There are cases when an ssh server is not directly accessible to our machine,
+but we have access to it through a hop (e.g. a bastion server). In that case,
+ssh supports connecting to one or more hops before connecting to the target
+server using the `-J` option.
+
+```bash
+ssh -J user1@the-internet user2@the-skynet
+```
+
+In the above example ssh client connects to the hop `the-internet`
+first, and through that server makes a TCP connection to `the-skynet` server.
+Other options like dynamic port forwarding work with this method. You can even
+specify different users and different ports for the hops and the target server.

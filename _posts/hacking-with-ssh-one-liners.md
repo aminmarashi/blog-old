@@ -1,20 +1,20 @@
 ---
 title: "Hacking with ssh one-liners"
-date: 2020-04-28
+date: 2020-05-05
 tags: [ssh]
 ---
 
-You can run a one-line command in a bash on the remote server you ssh to. There
-are all sort of cool things you can do with ssh client, learn more in [hacking
-with ssh](/hacking-with-ssh) post.
+You can run a one-line command in bash on the remote server you ssh to. There
+is all sorts of cool things you can do with an ssh client, learn more in
+[hacking with ssh](/hacking-with-ssh) post.
 
 ```bash
 ssh username@hostname [command]
 ```
 
 The command is passed as an argument to ssh. If the command is anything but a
-single word, you are encouraged to wrap it with single quote character (`'`).
-If the username is the same as your current machine username you can ommit it.
+single word, you are encouraged to wrap it with a single quote character (`'`).
+If the username is the same as your current machine username you can omit it.
 
 ```bash{outputLines: 2,3}
 ssh the-internet 'ls /'
@@ -31,8 +31,8 @@ echo> hello
 hello
 ```
 
-The `-t` option above is necessary to make the `echo:` prompt appear on the
-screen. But even without that option we can still interact with the input of
+The `-t` option above is necessary to make the `echo>` prompt appear on the
+screen. But even without that option, we can still interact with the input of
 the `read` command.
 
 ## Copying a file over the server
@@ -49,10 +49,10 @@ Hello world!
 
 ## Copying large files fast
 
-With a little help of our friend `gzip` we can even upload/download large
+With a little help from our friend `gzip` we can even upload/download large
 files. We are using a file containing only zeros, and therefore very easy to
-zip, but in reality text files are usually easy to zip as well, therefore this
-method is actually useful.
+zip, but in reality, text files are usually easy to zip as well, therefore this
+method is useful.
 
 ```bash{outputLines: 2}
 ssh the-internet 'du -Dsh /var/tmp/large'
@@ -70,7 +70,7 @@ user	0m5.468s
 sys	0m0.715s
 ```
 
-We have a large file in our local machine now:
+We have the large file in our local machine in no time :tada: :
 
 ```bash{outputLines: 2}
 du -sh /var/tmp/large
@@ -79,9 +79,10 @@ du -sh /var/tmp/large
 
 ## Advanced downloading using pv
 
-Suppose you want to see the progress of the file being downloaded, you can even
-control the rate of download. Suppose we have a large file:
+Suppose you want to see the progress of the file being downloaded, or have more
+control the rate of download.
 
+There is a relatively large file on our server called `random`.
 
 ```bash{outputLines: 2}
 ssh the-internet 'du -Dsh /var/tmp/random'
@@ -109,18 +110,19 @@ ssh the-internet 'cat /var/tmp/random' | pv -s217m -L1m | cat - > random
 ## Running a command on multiple servers
 
 There are times when we want to run a repatitive command on multiple servers,
-we can automate this using ssh. In fact that's how <a
-href="https://www.ansible.com/" target="_blank">`Ansible`</a> works.
+we can automate this using ssh. In fact that's how
+<a href="https://www.ansible.com/" target="_blank">Ansible</a>
+works.
 
 One use-case might be to change password for a user on multiple machines. Let's
-change password for `terminator`:
+change password for user `terminator`:
 
 ```bash{outputLines: 2}
 echo -e "supersecure\nsupersecure" | ssh the-internet 'sudo passwd terminator'
 New password: Retype new password: passwd: password updated successfully
 ```
 
-We can type in the hosts that will change the `terminator` password:
+We can type in the hosts to change the `terminator` password on:
 
 ```bash{outputLines: 3,5}
 xargs -IHOST sh -c 'echo "supersecure\nsupersecure" | ssh HOST "sudo passwd terminator"'
@@ -180,11 +182,18 @@ Connection to the-internet closed.
 
 ## Connecting to a server using a hop
 
-In case we want to access a third server that is only accessible from a hop server:
+In case we want to access a third server that is only accessible from a hop
+server:
 
 ```bash{outputLines: 2}
 ssh -tA hop 'ssh the-internet'
 u@the-internet:~ $
 ```
 
-Without `-t` ssh won't allocate tty, the session still works though. When `-A` is passed the ssh agent is forwarded to the hop, it is only necessary if the `hop` server doesn't have public key access to `the-internet` host.
+Without `-t` ssh won't allocate tty, the session still works though. When `-A`
+is passed the ssh agent is forwarded to the hop, it is only necessary if the
+`hop` server doesn't have public key access to `the-internet` host.
+
+There is a better way of doing this using the `-J` option of ssh client, see
+the [hacking with ssh](/hacking-with-ssh#connecting-via-a-hop) post for more
+info.

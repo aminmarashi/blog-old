@@ -21,8 +21,9 @@ Debian.
 
 ## Compiling Ruby
 
-The <a href="https://github.com/ruby/ruby#git" target="_blank">Ruby GitHub
-page</a> is very helpful when it comes to compiling Ruby from source code.
+The
+<a href="https://github.com/ruby/ruby#git" target="_blank">Ruby GitHub page</a>
+is very helpful when it comes to compiling Ruby from source code.
 
 > You can skip this step and go directly to [Compiling
 Chef](#compiling-chef) if your distro already has a suitable ruby version
@@ -71,9 +72,9 @@ gem install bundler
 
 ### Downloading the source
 
-Download the specific version of Chef source from <a
-href="https://github.com/chef/chef/" target="_blank">Chef on GitHub</a> then
-extract the package.
+Download the specific version of Chef source from
+<a href="https://github.com/chef/chef/" target="_blank">Chef on GitHub</a>
+then extract the package.
 
 ```bash
 wget https://github.com/chef/chef/archive/v15.6.10.tar.gz
@@ -99,9 +100,9 @@ After that start building Chef using `omnibus`:
 bundle exec omnibus build chef -l internal
 ```
 
-> <a href="https://github.com/chef/omnibus" target="_blank">Omnibus</a> is a
-packaging solution that makes sure the packages and all its dependencies are
-installed in a way that is easily manageable and will not conflict with the
+> <a href="https://github.com/chef/omnibus" target="_blank">Omnibus</a>
+is a packaging solution that makes sure the packages and all its dependencies
+are installed in a way that is easily manageable and will not conflict with the
 existing packages installed on your system.
 
 The result of the above build is a package specific to your OS, in this case,
@@ -116,8 +117,8 @@ chef_15.6.10*.deb
 ### Licensing issues
 
 In my case the build failed because of a licensing error, you can try
-ignoring licensing problems for the build, read more about that in <a
-href="https://github.com/chef/omnibus/issues/696" target="_blank">issue #696</a>.
+ignoring licensing problems for the build, read more about that in
+<a href="https://github.com/chef/omnibus/issues/696" target="_blank">issue #696</a>.
 
 I fixed that by editing the `omnibus.rb` file (the omnibus config) and adding
 these two lines:
