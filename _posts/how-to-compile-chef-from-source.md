@@ -4,19 +4,30 @@ date: 2020-04-29
 tags: [How-to]
 ---
 
-In this blog post, we will see how Chef can be built from source code. This is
-useful when you want to install Chef on a distro or machine which is not
-supported by default. Which is true for most ARM processors at the time of
-writing this.
+`ARM` machines can be cheaper alternatives to `X86_64` instances either running
+on bare metal (e.g. on Raspberyy Pi) or in cloud.
+
+They are becoming more and more popular and they're making their way into the
+consumer electronic.
+
+Chef is a popular `infrastructure-as-a-code` tool, which you can install to
+remotely or locally manage your servers.
+
+In this post you can find how to build your favorite version of Chef for ARM.
+
+> At the time of writing this article the most recent versions of Chef are
+available to download for ARM but not for all Linux distributions, namely
+Debian.
 
 ## Compiling Ruby
 
-**Note:** You can skip this step and go directly to [Compiling Chef](#compiling-chef) if
-your distro already has a suitable ruby version. In my case, the version was too
-old for the Chef build to work.
+The
+<a href="https://github.com/ruby/ruby#git" target="_blank">Ruby GitHub page</a>
+is very helpful when it comes to compiling Ruby from source code.
 
-The <a href="https://github.com/ruby/ruby#git" target="_blank">Ruby GitHub
-page</a> is very helpful when it comes to compiling Ruby from source code.
+> You can skip this step and go directly to [Compiling
+Chef](#compiling-chef) if your distro already has a suitable ruby version
+available. In my case, the version was too old for the Chef build to work.
 
 The building process is as easy as:
 
@@ -48,8 +59,8 @@ sudo cp -r ~/ruby/usr/* /usr
 
 ## Compiling Chef
 
-You will need `Ruby` and `bundler` to be installed to build Chef. `gem`
-comes as a package with the `Ruby`.
+You will need `Ruby` and `bundler` to be installed to build Chef. `gem` is also
+needed which comes as a package with `Ruby`.
 
 ### Installing bundler
 
@@ -61,9 +72,9 @@ gem install bundler
 
 ### Downloading the source
 
-Download the specific version of Chef source from <a
-href="https://github.com/chef/chef/" target="_blank">Chef on GitHub</a> then
-extract the package.
+Download the specific version of Chef source from
+<a href="https://github.com/chef/chef/" target="_blank">Chef on GitHub</a>
+then extract the package.
 
 ```bash
 wget https://github.com/chef/chef/archive/v15.6.10.tar.gz
@@ -73,7 +84,7 @@ cd ~/chef-15.6.10/omnibus # yes, chef is built from the omnibus folder
 
 ### Installing dependencies
 
-Then install the `gem`s required for building chef locally:
+Then install the required dependencies for building chef locally:
 
 ```bash
 bundle install --without development --path=.bundle
@@ -89,9 +100,9 @@ After that start building Chef using `omnibus`:
 bundle exec omnibus build chef -l internal
 ```
 
-<a href="https://github.com/chef/omnibus" target="_blank">Omnibus</a> is a
-packaging solution that makes sure the packages and all its dependencies are
-installed in a way that is easily manageable and will not conflict with the
+> <a href="https://github.com/chef/omnibus" target="_blank">Omnibus</a>
+is a packaging solution that makes sure the packages and all its dependencies
+are installed in a way that is easily manageable and will not conflict with the
 existing packages installed on your system.
 
 The result of the above build is a package specific to your OS, in this case,
@@ -106,11 +117,11 @@ chef_15.6.10*.deb
 ### Licensing issues
 
 In my case the build failed because of a licensing error, you can try
-ignoring licensing problems for the build, read more about that in <a
-href="https://github.com/chef/omnibus/issues/696" target="_blank">issue #696</a>.
+ignoring licensing problems for the build, read more about that in
+<a href="https://github.com/chef/omnibus/issues/696" target="_blank">issue #696</a>.
 
-In my case, I fixed that by editing the `omnibus.rb` file (the omnibus config)
-and adding these two lines:
+I fixed that by editing the `omnibus.rb` file (the omnibus config) and adding
+these two lines:
 
 ```ruby:title=omnibus.rb
 fatal_licensing_warnings false

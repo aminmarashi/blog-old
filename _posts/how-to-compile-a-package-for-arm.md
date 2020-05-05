@@ -4,23 +4,24 @@ date: 2020-04-28
 tags: [How-to]
 ---
 
-In this post, we will use `Qemu multiarch` inside Docker to compile C source
-codes for ARM processors.
+In this post, we will use `Qemu multiarch` inside Docker to compile source
+codes for `ARM` processors.
 
-If you want to know how to run an ARM64 Debian inside Docker skip to [Qemu
+> If you want to know how to run an `ARM64` Debian inside Docker skip to [Qemu
 multiarch](#qemu-multiarch)
 
 ## ARM architecture
 
-ARM refers to a large group of CPU architectures designed for embedded systems
-and low-cost computing. There are many variations of ARM instruction code and
-unfortunately, they are not very compatible with each other.
-It's important to identify the target architecture otherwise the built files
-may not be compatible with the target machine.
+<a href="https://en.wikipedia.org/wiki/ARM_architecture" target="_blank">ARM</a>
+refers to a large group of CPU architectures designed
+for embedded systems and low-cost computing. There are many variations of ARM
+instruction code and unfortunately, they are not very compatible with each
+other.  It's important to identify the target architecture otherwise the
+built files may not be compatible with the target machine.
 
-For this document, I am going to compile for `arm64` (aka `aarch64` as GCC calls
+For this post, I am going to compile for `arm64` (aka `aarch64` as GCC calls
 it). This architecture is used on `AWS ARM instances` which are available for a
-cheaper price than the AMD64 ones.
+cheaper price than the `X86_64` ones.
 
 Let's check the architecture of a Debian machine running on `aarch64`:
 
@@ -50,10 +51,12 @@ and allows running Docker images built for other architectures including
 
 ### Qemu multiarch
 
-First, we will need to enable <a href="https://github.com/multiarch/qemu-user-static" target="_blank">`qemu-user-static`</a>
+First, we will need to enable
+<a href="https://github.com/multiarch/qemu-user-static" target="_blank">qemu-user-static</a>
 which allows us to run the Docker image built for ARM.
 
-**Note:** This setup uses `binfmt`, read more: <a href="https://en.wikipedia.org/wiki/Binfmt_misc" target="_blank">`binfmt_misc`</a>
+**Note:** This setup uses `binfmt`, read more:
+<a href="https://en.wikipedia.org/wiki/Binfmt_misc" target="_blank">binfmt_misc</a>
 
 ```bash
 docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
@@ -64,15 +67,18 @@ built for different architectures seamlessly.
 
 ### Debian for aarch64
 
-The Docker image for `aarch64` is officially deprecated in favor of <a href="https://hub.docker.com/r/arm64v8/debian/" target="_blank">`arch64v8`</a>
-which has support for broader variants of the architecture.
-
 After enabling mutliarch, we can simply run the Debian image built for ARM:
 
 ```bash{outputLines: 2}
 docker run -it arm64v8/debian:stretch
 root@3b853bce5181:/#
 ```
+
+> The Docker image for
+<a href="https://hub.docker.com/r/aarch64/debian" target="_blank">aarch64</a>
+is officially deprecated in favor of
+<a href="https://hub.docker.com/r/arm64v8/debian/" target="_blank">arch64v8</a>
+which has support for broader variants of the architecture.
 
 Now we can see the architecture is shown to be ARM:
 
@@ -83,8 +89,10 @@ dpkg --print-architecture
 arm64
 ```
 
-That's it, we should now be able to download the source code and build it for
-`aarch64` inside that container.
+That's it, we should now be able to download the desired source code and build
+it for `aarch64` inside that container.
+
+For this post we will stick to a very simple program written in C.
 
 ### Building a simple helloworld in C
 
