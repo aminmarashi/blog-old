@@ -13,7 +13,7 @@ it uniquely useful when connecting two or more machines.
 This post is inspired by
 <a href="https://smallstep.com/blog/ssh-tricks-and-tips/" target="_blank">ssh tips and tricks</a>.
 
-## password-less authentication
+## Password-less authentication
 
 In addition to password authentication, there are other methods that OpenSSH
 supports. One of the most well-known authentication methods is public-key
