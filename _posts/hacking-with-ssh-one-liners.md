@@ -1,7 +1,7 @@
 ---
 title: "Hacking with ssh one-liners"
 date: 2020-05-05
-tags: [ssh]
+tags: [ssh,hacking]
 ---
 
 You can run a one-line command in bash on the remote server you ssh to. There

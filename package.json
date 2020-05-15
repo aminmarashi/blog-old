@@ -61,8 +61,8 @@
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
     "dev": "gatsby develop",
-    "gh-pages": "git subtree push --prefix public origin gh-pages",
-    "deploy": "npm run rebuild && git checkout public/CNAME && git add public && git commit -m 'Pages build' && npm run gh-pages",
+    "gh-pages": "git subtree split --prefix public -b gh-pages && git push -f origin gh-pages:gh-pages && git branch -D gh-pages",
+    "deploy": "npm run rebuild && git checkout public/CNAME && git add public && git commit --allow-empty -m 'Pages build' && npm run gh-pages",
     "dev-mobile": "gatsby develop -H 0.0.0.0"
   },
   "repository": {
