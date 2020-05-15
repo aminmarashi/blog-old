@@ -13,12 +13,12 @@ it uniquely useful when connecting two or more machines.
 This post is inspired by
 <a href="https://smallstep.com/blog/ssh-tricks-and-tips/" target="_blank">ssh tips and tricks</a>.
 
-## Logging in without a password
+## Password-less authentication
 
 In addition to password authentication, there are other methods that OpenSSH
 supports. One of the most well-known authentication methods is public-key
 authentication. You can maintain a list of known public keys on the server and
-allow passwordless login whenever a client connects using the corresponding
+allow password-less login whenever a client connects using the corresponding
 private key.
 
 ```bash:title=authorized_keys
