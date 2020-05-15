@@ -1,7 +1,7 @@
 ---
 title: "Hacking with ssh"
 date: 2020-05-05
-tags: [ssh]
+tags: [ssh,hacking]
 ---
 
 Cool things you can do with an ssh client, and a Linux machine. Secure Shell is

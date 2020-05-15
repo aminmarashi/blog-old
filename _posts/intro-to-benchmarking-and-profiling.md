@@ -1,7 +1,7 @@
 ---
 title: "Introduction to benchmarking and profiling"
 date: 2020-05-15
-tags: [benchmarking,profiling]
+tags: [benchmarking,profiling,introduction]
 ---
 
 # Benchmarking and profiling
