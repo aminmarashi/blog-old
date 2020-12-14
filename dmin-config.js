@@ -6,7 +6,7 @@ const config = {
   ========================================= */
   title: `lit.codes`, // Displayed in header
   description: `A developer community`, // Site description
-  maxWidth: "720px", // Max width of website
+  maxWidth: 720, // Max width of website
   enableAbout: false, // Enables about page
   siteUrl: `https://blog.lit.codes/`, // Used for sitemap; improves SEO
 
