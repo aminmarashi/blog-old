@@ -18,7 +18,7 @@ We will also see a few challenges when we used these tools on top of Kubernetes.
 
 Our stack looks like this.
 
-<pre>
+```
 ==== applications =====       ====== monitoring ======
 |                     |       |                      |
 | Nodejs + PostgreSQL |       | Grafana + Prometheus |
@@ -30,7 +30,7 @@ Our stack looks like this.
 |   Kubernetes (k3s)  |  ----------------^
 |                     |
 =======================
-</pre>
+```
 
 Each of the boxes above represent a separate namespace in our Kubernetes
 cluster. The reason to choose a separate namespace for our monitoring tools
